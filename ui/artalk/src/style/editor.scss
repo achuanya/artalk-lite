@@ -93,8 +93,8 @@
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
-    // collapsed total height equals the 48px avatar (44px content + 2*2px border)
-    height: 48px;
+    // collapsed total height equals the 50px avatar (44px content + 2*2px border)
+    height: 50px;
     background: var(--at-color-bg);
     border: 2px solid var(--at-color-border);
     border-radius: $block-radius;
