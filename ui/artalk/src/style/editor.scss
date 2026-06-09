@@ -221,8 +221,9 @@
       // large order value reliably pushes the preview after .atk-bottom.
       order: 99;
       width: auto;
+      // 高度由 JS 同步为 textarea 的高度，这里不设固定值与最小高度
       height: auto;
-      min-height: 100px;
+      min-height: 0;
       max-height: none;
       margin: 0;
       padding: 0;
@@ -232,7 +233,8 @@
       border-top: 1px dashed var(--at-color-border);
       border-radius: 0 0 calc($block-radius - 2px) calc($block-radius - 2px);
       box-shadow: none;
-      overflow: visible;
+      // 严令禁止出现滚动条
+      overflow: hidden;
       animation: none;
 
       // Cancel the floating-placement variants set by JS — we don't float.
@@ -245,12 +247,11 @@
         box-shadow: none;
       }
 
-      // Kill the inner scrollbar / fixed height inherited from preview.scss
-      // so the content fully expands and merges into the page scroll.
+      // 预览框高度由 JS 同步到 textarea 高度（inline style），
+      // 这里不再用 height: auto 覆盖，保证两者高度一致；并严令禁止滚动条。
       & > .atk-editor-plug-preview {
-        height: auto;
         max-height: none;
-        overflow: visible;
+        overflow: hidden;
       }
     }
 

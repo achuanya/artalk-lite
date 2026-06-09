@@ -48,8 +48,21 @@ export default class Textarea extends EditorPlugin {
 
   // Resize the textarea height by content
   public adaptiveHeightByContent() {
-    const diff = this.kit.useUI().$textarea.offsetHeight - this.kit.useUI().$textarea.clientHeight
-    this.kit.useUI().$textarea.style.height = '0px' // it's a magic. 若不加此行，内容减少，高度回不去
-    this.kit.useUI().$textarea.style.height = `${this.kit.useUI().$textarea.scrollHeight + diff}px`
+    const $ta = this.kit.useUI().$textarea
+    // 临时禁用 transition，避免 height 过渡动画干扰 scrollHeight 的测量，
+    // 否则内容减少时 textarea 高度无法正确回弹。
+    const prevTransition = $ta.style.transition
+    $ta.style.transition = 'none'
+
+    const diff = $ta.offsetHeight - $ta.clientHeight
+    $ta.style.height = '0px' // it's a magic. 若不加此行，内容减少，高度回不去
+    $ta.style.height = `${$ta.scrollHeight + diff}px`
+
+    // 强制 reflow 后再恢复 transition，确保新高度立即生效
+    void $ta.offsetHeight
+    $ta.style.transition = prevTransition
+
+    // 通知预览框同步高度
+    this.kit.useEvents().trigger('editor-height-changed', $ta.offsetHeight)
   }
 }

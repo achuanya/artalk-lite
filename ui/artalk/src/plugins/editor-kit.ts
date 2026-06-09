@@ -19,6 +19,7 @@ export interface EditorEventPayloadMap {
   'header-input': { field: string; $input: HTMLInputElement }
   'header-change': { field: string; $input: HTMLInputElement }
   'content-updated': string
+  'editor-height-changed': number
   'panel-show': EditorPlugin
   'panel-hide': EditorPlugin
   'panel-close': undefined
