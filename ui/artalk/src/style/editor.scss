@@ -37,6 +37,12 @@
     & > .atk-editor-form {
       width: calc(100% - 44px);
     }
+
+    @media only screen and (max-width: 820px) {
+      & > .atk-editor-form {
+        width: 100%;
+      }
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -81,6 +87,22 @@
 
     @media only screen and (max-width: 768px) {
       width: calc(100% - 44px);
+    }
+  }
+
+  // Below 820px: hide the avatar and let the form fill the whole row
+  @media only screen and (max-width: 820px) {
+    & > .atk-editor-avatar {
+      display: none;
+    }
+
+    & > .atk-editor-form {
+      width: 100%;
+      // The collapsed guest fields use margin-top: -40px, which would shrink
+      // this flex-column's height. Without the avatar holding the row open,
+      // floor the height to the collapsed input box so the next comment
+      // doesn't overlap it.
+      min-height: 50px;
     }
   }
 
