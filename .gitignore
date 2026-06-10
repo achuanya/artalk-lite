@@ -72,3 +72,7 @@ test-results
 
 # TypeScript composite build declaration output
 .tsbuildinfo-dts/
+
+/ui/artalk-sidebar/auto-imports.d.ts
+/ui/artalk-sidebar/components.d.ts
+/ui/artalk-sidebar/typed-router.d.ts
